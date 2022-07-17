@@ -1,10 +1,13 @@
 package com.xkcoding.logback;
 
 import com.xkcoding.logback.error.ErrorExample;
+import com.xkcoding.logback.error.ExceptionExample;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import java.rmi.server.ExportException;
 
 /**
  * <p>
@@ -36,5 +39,9 @@ public class SpringBootDemoLogbackApplication {
 
         ErrorExample errorExample = new ErrorExample();
         errorExample.log();
+
+        ExceptionExample exceptionExample = new ExceptionExample();
+        exceptionExample.log();
+
     }
 }
