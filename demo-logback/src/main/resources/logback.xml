@@ -7,10 +7,6 @@
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!--    如果不设置math策略默认，neutral打印-->
             <level>error</level>
-            <!--匹配到就禁止-->
-            <onMatch>DENY</onMatch>
-            <!--没有匹配到就允许-->
-            <onMismatch>ACCEPT</onMismatch>
         </filter>
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
@@ -76,10 +72,25 @@
         </encoder>
     </appender>
 
+    <appender name="async_info" class="ch.qos.logback.classic.AsyncAppender">
+        <includeCallerData>false</includeCallerData>
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE_INFO"/>
+    </appender>
+
+    <!-- off 关闭日志-->
+    <logger name="dubbo_rpc_access_provider" level="OFF"/>
+
+    <!-- 指定logger配置 遵循责任链模式  name 包或类路径  additivity 是否责任往上传递 -->
+    <logger name="com.xkcoding.logback.error" level="error" additivity="false">
+
+    </logger>
+
 
     <root level="info">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE_INFO"/>
+        <appender-ref ref="async_info"/>
         <appender-ref ref="FILE_ERROR"/>
     </root>
 </configuration>

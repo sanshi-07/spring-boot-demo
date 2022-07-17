@@ -1,5 +1,6 @@
 package com.xkcoding.logback;
 
+import com.xkcoding.logback.error.ErrorExample;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,11 +26,15 @@ public class SpringBootDemoLogbackApplication {
         log.info("Spring boot启动初始化了 {} 个 Bean", length);
         log.warn("Spring boot启动初始化了 {} 个 Bean", length);
         log.error("Spring boot启动初始化了 {} 个 Bean", length);
+
         try {
             int i = 0;
             int j = 1 / i;
         } catch (Exception e) {
             log.error("【SpringBootDemoLogbackApplication】启动异常：", e);
         }
+
+        ErrorExample errorExample = new ErrorExample();
+        errorExample.log();
     }
 }
